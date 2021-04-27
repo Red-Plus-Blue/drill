@@ -13,6 +13,15 @@ public class PlayerControllerComponent : MonoBehaviour
 
     public bool InputLocked;
 
+    public int MiningDamage = 2;
+
+    protected static Player SavedPlayer = new Player()
+    {
+        Money = 0,
+        Durability = 1_000f,
+        Fuel = 100f
+    };
+
     [SerializeField]
     protected float _speed = 3f;
     [SerializeField]
@@ -39,8 +48,6 @@ public class PlayerControllerComponent : MonoBehaviour
     protected float _currentFuel = 100f;
     protected float _maxFuel = 100f;
 
-    public int MiningDamage = 2;
-
     protected Rigidbody2D _rigidbody2D;
 
     private void Awake()
@@ -50,12 +57,12 @@ public class PlayerControllerComponent : MonoBehaviour
 
     private void Start()
     {
-        _money.Set(GameManagerComponent.Instance.Money);
+        _money.Set(SavedPlayer.Money);
 
-        _currentFuel = GameManagerComponent.Instance.Fuel;
+        _currentFuel = SavedPlayer.Fuel;
         _fuelLevel.Set(_currentFuel / _maxFuel);
 
-        _drillDurability = GameManagerComponent.Instance.Durability;
+        _drillDurability = SavedPlayer.Durability;
         _durability.Set(_drillDurability / _drillDurabilityMax);
     }
 
@@ -148,6 +155,12 @@ public class PlayerControllerComponent : MonoBehaviour
     public void Die()
     {
         gameObject.SetActive(false);
+        SavedPlayer = new Player()
+        {
+            Money = 0,
+            Durability = 1_000f,
+            Fuel = 100
+        };
         GameManagerComponent.Instance.Lose("Destroyed");
     }
 
@@ -157,11 +170,21 @@ public class PlayerControllerComponent : MonoBehaviour
         _durability.Set(_drillDurability / _drillDurabilityMax);
     }
 
+    public void ResetDefaults()
+    {
+        _money.Set(0);
+        _drillDurability = 1_000f;
+        _currentFuel = 100f;
+    }
+
     public void StoreResults()
     {
-        GameManagerComponent.Instance.Fuel = _currentFuel;
-        GameManagerComponent.Instance.Money = _money.Get();
-        GameManagerComponent.Instance.Durability = _drillDurability;
+        SavedPlayer = new Player()
+        {
+            Money = _money.Get(),
+            Durability = _drillDurability,
+            Fuel = _currentFuel
+        };
     }
 
 }

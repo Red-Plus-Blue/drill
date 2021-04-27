@@ -23,11 +23,15 @@ public class UIComponent : MonoBehaviour
     [SerializeField]
     protected List<GameObject> _ui;
   
-
     protected float _fuelLevel;
 
     private void Start()
     {
+        var player = FindObjectOfType<PlayerControllerComponent>();
+        player.Money.Subscribe(SetMoney);
+        player.Durability.Subscribe(SetDurability);
+        player.FuelLevel.Subscribe(SetFuelLevel);
+
         _level.text = $"Level: {GameManagerComponent.Instance.Level}";
     }
 

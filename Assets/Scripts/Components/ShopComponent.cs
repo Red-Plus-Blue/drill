@@ -47,7 +47,7 @@ public class ShopComponent : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Q) && _currentShop == this)
         {
-            if(_player.Money >= _cost)
+            if(_player.CanBuy(_cost))
             {
                 _player.AddMoney(-_cost);
                 Instantiate(_effect, Vector3.zero, Quaternion.identity);

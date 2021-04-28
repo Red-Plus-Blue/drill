@@ -22,28 +22,33 @@ public class UIComponent : MonoBehaviour
     protected TMP_Text _defeatText;
     [SerializeField]
     protected List<GameObject> _ui;
-  
-    protected float _fuelLevel;
+
+    protected (float, float) _fuelRange; 
+    protected (float, float) _durabilityRange;
 
     private void Start()
     {
         var player = FindObjectOfType<PlayerControllerComponent>();
-        player.Money.Subscribe(SetMoney);
-        player.Durability.Subscribe(SetDurability);
-        player.FuelLevel.Subscribe(SetFuelLevel);
+        player.Money.Value.Subscribe(SetMoney);
+        player.Durability.Bounds.Subscribe(value => _durabilityRange = value);
+        player.Durability.Value.Subscribe(SetDurability);
+
+        player.Fuel.Bounds.Subscribe(value => _fuelRange = value);
+        player.Fuel.Value.Subscribe(SetFuelLevel);
 
         _level.text = $"Level: {GameManagerComponent.Instance.Level}";
     }
 
     public void SetDurability(float durability)
     {
-        _durability.localScale = new Vector3(durability, _durability.localScale.y, _durability.localScale.z);
+        var value = durability / _durabilityRange.Item2;
+        _durability.localScale = new Vector3(value , _durability.localScale.y, _durability.localScale.z);
     }
 
-    public void SetFuelLevel(float level)
+    public void SetFuelLevel(float fuel)
     {
-        _fuelLevel = level;
-        _needle.rotation = Quaternion.Euler(0f, 0f, 80f + (-160 * level));
+        var value = fuel / _fuelRange.Item2;
+        _needle.rotation = Quaternion.Euler(0f, 0f, 80f + (-160 * value));
     }
 
     public void SetMoney(int amount)

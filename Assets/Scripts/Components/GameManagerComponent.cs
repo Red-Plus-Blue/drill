@@ -61,7 +61,7 @@ public class GameManagerComponent : MonoBehaviour
         Defeated = true;
         var player = FindObjectOfType<PlayerControllerComponent>(true);
         player.InputLocked = true;
-        var details = $"{reason}\nYou lost on level: {Level}\nFinal Score: $ {player.Money}\nPress 'r' to restart";
+        var details = $"{reason}\nYou lost on level: {Level}\nFinal Score: $ {player.Money.Current}\nPress 'r' to restart";
         FindObjectOfType<UIComponent>().ShowDefeatScreen(details);
     }
 }

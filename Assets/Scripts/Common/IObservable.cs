@@ -6,4 +6,6 @@ public interface IObservable<T>
 
     void UnSubscribe(Action<T> onChange);
 
+    void RemoveAllListeners();
+
 }

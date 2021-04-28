@@ -375,9 +375,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad5c275bc19fe544a9bc75c47b97912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Fuel: 100
-  Money: 0
-  Durability: 1000
 --- !u!1 &174499413
 GameObject:
   m_ObjectHideFlags: 0

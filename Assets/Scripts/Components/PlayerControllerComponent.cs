@@ -5,16 +5,6 @@ using System.Collections.Generic;
 
 public class PlayerControllerComponent : MonoBehaviour
 {
-    public IRange<int> Money => _money;
-    public IRange<float> Fuel => _fuel;
-    public IRange<float> Durability => _durability;
-
-    public bool CanBuy(int cost) => _money.Current > cost;
-
-    public bool InputLocked;
-
-    public int MiningDamage = 2;
-
     protected static Player SavedPlayer = new Player()
     {
         Money = 0,
@@ -22,14 +12,19 @@ public class PlayerControllerComponent : MonoBehaviour
         Fuel = 100f
     };
 
+    public IRange<int> Money => _money;
+    public IRange<float> Fuel => _fuel;
+    public IRange<float> Durability => _durability;
+
+    public bool InputLocked;
+    public int MiningDamage = 2;
+
     [SerializeField]
     protected float _speed = 3f;
     [SerializeField]
     protected float _rotationSpeed = 90f;
     [SerializeField]
     protected GameObject _rockEffect;
-    [SerializeField]
-    protected List<ParticleSystem> _drillParticles;
 
     protected DrillAnimatorComponent _animator;
 
@@ -43,6 +38,8 @@ public class PlayerControllerComponent : MonoBehaviour
     protected bool _outOfFuel;
 
     protected Rigidbody2D _rigidbody2D;
+
+    public bool CanBuy(int cost) => _money.Current > cost;
 
     private void Awake()
     {
@@ -103,10 +100,7 @@ public class PlayerControllerComponent : MonoBehaviour
         var block = other.GetComponent<BlockComponent>();
         if (!block) { return; }
 
-        _drillParticles
-            .Where(particle => particle.isStopped)
-            .ToList()
-            .ForEach(particle => particle.Play());
+        _animator.ShowDrillParticles();
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -114,10 +108,7 @@ public class PlayerControllerComponent : MonoBehaviour
         var block = other.GetComponent<BlockComponent>();
         if(!block) { return; }
 
-        _drillParticles
-            .Where(particle => particle.isStopped)
-            .ToList()
-            .ForEach(particle => particle.Play());
+        _animator.ShowDrillParticles();
 
         if ((Time.time >= _nextDrillTime) && (_durability.Current > 0f))
         {
@@ -136,7 +127,7 @@ public class PlayerControllerComponent : MonoBehaviour
         var block = other.GetComponent<BlockComponent>();
         if (!block) { return; }
 
-        _drillParticles.ForEach(particle => particle.Stop());
+        _animator.HideDrillParticles();
     }
 
     private void OnDestroy()

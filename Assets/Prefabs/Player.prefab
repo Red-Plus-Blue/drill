@@ -327,13 +327,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InputLocked: 0
+  MiningDamage: 2
   _speed: 3
   _rotationSpeed: 90
   _rockEffect: {fileID: 0}
-  _drillParticles:
-  - {fileID: 4242364349758485525}
-  - {fileID: 2161233374268357952}
-  MiningDamage: 2
 --- !u!114 &5710720247471078819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +353,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6bf47f0e13b36f942a0f74495d004793, type: 3}
   - {fileID: 21300000, guid: 00fe80de29196ca459373605485359b9, type: 3}
   - {fileID: 21300000, guid: bbed632cd295dbf41b445fb94dfdbbea, type: 3}
+  _drillParticles:
+  - {fileID: 4242364349758485525}
+  - {fileID: 2161233374268357952}
   _drill: {fileID: 5215232395625524941}
   _drillFrames:
   - {fileID: 21300000, guid: 6e02c76d2c9a40c4abd6bcd38400afc0, type: 3}

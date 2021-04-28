@@ -19,6 +19,8 @@ public class DrillAnimatorComponent : MonoBehaviour
     protected SpriteRenderer _dirtRenderer;
     [SerializeField]
     protected List<Sprite> _dirtLevels;
+    [SerializeField]
+    protected List<ParticleSystem> _drillParticles;
 
     protected Color _startColor;
 
@@ -84,6 +86,19 @@ public class DrillAnimatorComponent : MonoBehaviour
     {
         _heat = Mathf.Min(_maxHeat, _heat + amount);
         _nextHeatDecayTime = Time.time + 1.0f;
+    }
+
+    public void ShowDrillParticles()
+    {
+        _drillParticles
+           .Where(particle => particle.isStopped)
+           .ToList()
+           .ForEach(particle => particle.Play());
+    }
+
+    public void HideDrillParticles()
+    {
+        _drillParticles.ForEach(particle => particle.Stop());
     }
 
     protected void UpdateTracks()

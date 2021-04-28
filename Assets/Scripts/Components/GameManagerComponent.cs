@@ -41,7 +41,7 @@ public class GameManagerComponent : MonoBehaviour
     public void StartGame(bool fromTitleScreen)
     {
         Level = 0;
-        FindObjectOfType<PlayerControllerComponent>().ResetDefaults();
+        FindObjectOfType<PlayerControllerComponent>(true).ResetDefaults();
         ExitLevel(fromTitleScreen);
     }
 
@@ -51,7 +51,7 @@ public class GameManagerComponent : MonoBehaviour
         if (_exiting) { return; }
         Level += 1;
         _exiting = true;
-        FindObjectOfType<PlayerControllerComponent>().StoreResults();
+        FindObjectOfType<PlayerControllerComponent>(true).StoreResults();
         ExitComponent.TouchingExitCount = 0;
         SceneManager.LoadScene(LEVEL_SCENE);
     }

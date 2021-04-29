@@ -668,7 +668,7 @@ GameObject:
   - component: {fileID: 8717565524386546069}
   - component: {fileID: 8795001532653064780}
   m_Layer: 7
-  m_Name: FuelBlock
+  m_Name: Block-Fuel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -727,11 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7936055bb2a2ebc4a9c68a1814cce63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Money: 0
-  Fuel: 35
-  _impassable: 0
-  _damagedSprite: {fileID: 21300000, guid: 30e3de895af6ef1448d00cb0415d03d4, type: 3}
-  _spawnOnDeath: []
+  _definition: {fileID: 11400000, guid: 842d28ec14a32e14691bfaae90b29a1b, type: 2}
 --- !u!1 &8717565524944021735
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -11,7 +12,6 @@ public class PlayerControllerComponent : MonoBehaviour
         Durability = 1_000f,
         Fuel = 100f
     };
-
     public IRange<int> Money => _money;
     public IRange<float> Fuel => _fuel;
     public IRange<float> Durability => _durability;
@@ -38,6 +38,9 @@ public class PlayerControllerComponent : MonoBehaviour
     protected bool _outOfFuel;
 
     protected Rigidbody2D _rigidbody2D;
+
+    protected Func<float> _vertical = () => Input.GetAxis("Vertical");
+    protected Func<float> _horizontal = () => -Input.GetAxis("Horizontal");
 
     public bool CanBuy(int cost) => _money.Current > cost;
 
@@ -66,16 +69,22 @@ public class PlayerControllerComponent : MonoBehaviour
     {
         if(InputLocked || _outOfFuel) { return; }
 
-        var horizontal = -Input.GetAxis("Horizontal");
-        var vertical = Input.GetAxis("Vertical");
+        var horizontal = _horizontal();
+        var vertical = _vertical();
 
-        if((vertical != 0f) || (horizontal != 0f))
+        if ((vertical != 0f) || (horizontal != 0f))
         {
             _fuel.Set(_fuel.Current - Time.fixedDeltaTime);
         }
 
         transform.position += transform.up * vertical * _speed * Time.fixedDeltaTime;
         transform.rotation *= Quaternion.Euler(0f, 0f, horizontal * _rotationSpeed * Time.fixedDeltaTime);
+    }
+
+    public void AttachInput(Func<float> vertical, Func<float> horizontal)
+    {
+        _vertical = vertical;
+        _horizontal = horizontal;
     }
 
     public void AddMoney(int amount)

@@ -9,23 +9,17 @@ public class BlockComponent : MonoBehaviour
 {
     protected const string LAYER_NO_COLLIDE = "BlockNoCollide";
 
-    public int Money;
-    public float Fuel;
-    public bool Impassable { get => _impassable; }
+    public BlockDefinition Definition { get => _definition; }
 
     [SerializeField]
-    protected bool _impassable;
-    [SerializeField]
-    protected Sprite _damagedSprite;
-    [SerializeField]
-    protected List<GameObject> _spawnOnDeath;
+    protected BlockDefinition _definition;
 
     protected SpriteRenderer _renderer;
     protected Block _block;
 
     private void Awake()
     {
-        if(_spawnOnDeath.Count == 0) { _spawnOnDeath = null;  }
+        if(_definition.SpawnOnDeath?.Count == 0) { _definition.SpawnOnDeath = null;  }
 
         _renderer = GetComponentInChildren<SpriteRenderer>();
         _renderer.flipX = Random.Range(0, 2) == 0;
@@ -34,7 +28,7 @@ public class BlockComponent : MonoBehaviour
 
     public void TakeDamge(int amount, bool isPlayer)
     {
-        if(_impassable) { return; }
+        if(_definition.Impassable) { return; }
         if(_block == null)
         {
             TakeFirstDamage();
@@ -52,7 +46,7 @@ public class BlockComponent : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer(LAYER_NO_COLLIDE);
         _renderer.flipX = false;
         _renderer.flipY = false;
-        _renderer.sprite = _damagedSprite;
+        _renderer.sprite = _definition.DamagedSprite;
         _block = new Block();
         _block.OnDeath += OnBlockDeath;
     }
@@ -61,14 +55,14 @@ public class BlockComponent : MonoBehaviour
     {
         if(isPlayer)
         {
-            _spawnOnDeath?.ForEach(prefab => Instantiate(
+            _definition.SpawnOnDeath?.ForEach(prefab => Instantiate(
                 prefab,
                 transform.position + (Vector3)(Random.insideUnitCircle.normalized * 0.5f),
                 Quaternion.identity));
 
             var player = FindObjectOfType<PlayerControllerComponent>();
-            player.AddMoney(Money);
-            player.AddFuel(Fuel);
+            player.AddMoney(_definition.Money);
+            player.AddFuel(_definition.Fuel);
         }
         Destroy(gameObject);
     }

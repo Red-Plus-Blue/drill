@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 using System.Collections.Generic;
 
@@ -22,6 +23,8 @@ public class UIComponent : MonoBehaviour
     protected TMP_Text _defeatText;
     [SerializeField]
     protected List<GameObject> _ui;
+    [SerializeField]
+    protected RectTransform _joystick;
 
     protected (float, float) _fuelRange; 
     protected (float, float) _durabilityRange;
@@ -37,6 +40,21 @@ public class UIComponent : MonoBehaviour
         player.Fuel.Value.Subscribe(SetFuelLevel);
 
         _level.text = $"Level: {GameManagerComponent.Instance.Level}";
+
+#if UNITY_ANDROID
+  player.AttachInput(
+            () =>
+            {
+                var y = new Vector2(_joystick.localPosition.x, _joystick.localPosition.y).normalized.y;
+                return Mathf.Abs(y) < 0.05f ? 0f : y;
+            },
+            () =>
+            {
+                var x = new Vector2(_joystick.localPosition.x, _joystick.localPosition.y).normalized.x;
+                return -(Mathf.Abs(x) < 0.05f ? 0f : x);
+            }
+        );
+#endif
     }
 
     public void SetDurability(float durability)

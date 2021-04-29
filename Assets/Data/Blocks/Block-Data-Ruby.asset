@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 169b40ec480dcbf428d38912884d61aa, type: 3}
+  m_Name: Block-Data-Ruby
+  m_EditorClassIdentifier: 
+  Money: 0
+  Fuel: 0
+  Impassable: 0
+  DamagedSprite: {fileID: 21300000, guid: 30e3de895af6ef1448d00cb0415d03d4, type: 3}
+  SpawnOnDeath:
+  - {fileID: 8463024655811980111, guid: 8c6c5719a012fb44aa3c81e7b52373eb, type: 3}
+  - {fileID: 8463024655811980111, guid: 8c6c5719a012fb44aa3c81e7b52373eb, type: 3}
+  - {fileID: 8463024655811980111, guid: 8c6c5719a012fb44aa3c81e7b52373eb, type: 3}
+  - {fileID: 8463024655811980111, guid: 8c6c5719a012fb44aa3c81e7b52373eb, type: 3}

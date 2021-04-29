@@ -163,7 +163,7 @@ public class EnemyComponent : MonoBehaviour
             var block = hit.collider.GetComponent<BlockComponent>();
             if(block)
             {
-                if(block.Impassable)
+                if(block.Definition.Impassable)
                 {
                     _targetVector = -transform.up;
                     _state = StateTurnAround;

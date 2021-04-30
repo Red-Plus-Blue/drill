@@ -1265,25 +1265,25 @@ Tilemap:
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
-      e00: -2.5244127e-29
-      e01: 1.08072115e+15
-      e02: 1.0806621e+15
-      e03: 1.0806621e+15
-      e10: 5.07e-43
-      e11: 7.1e-44
-      e12: 7.1e-44
-      e13: 7.1e-44
+      e00: 1.084227e-19
+      e01: -2.4942135e+34
+      e02: -2.4939956e+34
+      e03: -2.4939956e+34
+      e10: 9.02e-43
+      e11: 2.96e-43
+      e12: 2.96e-43
+      e13: 2.96e-43
       e20: 1.066097e+10
-      e21: -3.9888734e+19
-      e22: 0.0000000021093474
-      e23: -3.9888734e+19
+      e21: 1.722275e+29
+      e22: -7.2290688
+      e23: 1.722275e+29
       e30: 4.5904e-41
-      e31: 5.09e-43
-      e32: 5.07e-43
-      e33: 5.09e-43
+      e31: 9.04e-43
+      e32: 9.01e-43
+      e33: 9.04e-43
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: -3.9885497e+19, g: -3.9885497e+19, b: -3.9885497e+19, a: -3.9885497e+19}
+    m_Data: {r: 1.722136e+29, g: 1.722136e+29, b: 1.722136e+29, a: 1.722136e+29}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1382,7 +1382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tileMap: {fileID: 552001928}
-  _blockPrefab: {fileID: 8717565524386546067, guid: 82dd59e340bf9d34e9503afde57d7259, type: 3}
+  _blockPrefab: {fileID: 8795001532653064780, guid: 82dd59e340bf9d34e9503afde57d7259, type: 3}
 --- !u!1 &589199756
 GameObject:
   m_ObjectHideFlags: 0
@@ -3794,17 +3794,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 3224041150178841763, guid: 2a1a2e5a84523cd4381dad80ff86601d, type: 3}
-  _blockPrefab: {fileID: 8795001532653064780, guid: 82dd59e340bf9d34e9503afde57d7259, type: 3}
-  _fuelBlock: {fileID: 8795001532653064780, guid: 68c783af8ff005e46a0ec9a626eed00c, type: 3}
-  _moneyBlocks:
-  - {fileID: 4566647435739386402, guid: b2a052e8cba54294abfcb5ce342a44cc, type: 3}
-  - {fileID: 4566647435739386402, guid: f280015e76354504b83b872fa2686246, type: 3}
-  - {fileID: 4566647435739386402, guid: 1cf8490815de2ea4eba7bee4bebc2892, type: 3}
-  _impassableBlockPrefab: {fileID: 8795001532653064780, guid: 67500c9c7b413dd4a973fb1fcc243dea, type: 3}
+  _block: {fileID: 11400000, guid: 4673ec3332978a74abe1af858f2bd773, type: 2}
+  _impassableBlock: {fileID: 11400000, guid: 3331343625d5b594eb73bc0ed66091b8, type: 2}
   _background: {fileID: 1602199850}
   _exitPrefab: {fileID: 5005403584520976866, guid: dbc7d42f68943484189399bd4b2a70a5, type: 3}
-  _tile: {fileID: 11400000, guid: 4673ec3332978a74abe1af858f2bd773, type: 2}
-  _impassableTile: {fileID: 11400000, guid: ec459f0f010a7a843b1ffe8edbe137ab, type: 2}
   _dirt: {fileID: 552001928}
 --- !u!1 &1960618001
 GameObject:

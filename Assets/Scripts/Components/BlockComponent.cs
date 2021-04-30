@@ -9,7 +9,10 @@ public class BlockComponent : MonoBehaviour
 {
     protected const string LAYER_NO_COLLIDE = "BlockNoCollide";
 
-    public BlockDefinition Definition { get => _definition; }
+    public BlockDefinition Definition { 
+        get => _definition; 
+        set => _definition = value;
+    }
 
     [SerializeField]
     protected BlockDefinition _definition;

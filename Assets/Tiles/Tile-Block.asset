@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
+  m_Script: {fileID: 11500000, guid: cd8b485ee115de84b8e4fc150c10800b, type: 3}
   m_Name: Tile-Block
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: 017e73a1d0fdf77489faf55ac626705d, type: 3}
@@ -34,3 +34,4 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
+  Definition: {fileID: 11400000, guid: 01ebdd1f5c7249f4ab0cce3a430fe99e, type: 2}

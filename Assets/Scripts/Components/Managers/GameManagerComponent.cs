@@ -3,12 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManagerComponent : MonoBehaviour
 {
-    protected const int LEVEL_SCENE = 0;
     public static GameManagerComponent Instance { get; protected set; }
     public bool IsFirstLoad { get; protected set; } = true;
     public bool IsTutorial { get; protected set;}
     public int Level { get; protected set; }
     public bool Defeated { get; protected set; }
+
+    [SerializeField]
+    protected int _buildIndex;
 
     protected bool _exiting;
 
@@ -53,7 +55,7 @@ public class GameManagerComponent : MonoBehaviour
         _exiting = true;
         FindObjectOfType<PlayerControllerComponent>(true).StoreResults();
         ExitComponent.TouchingExitCount = 0;
-        SceneManager.LoadScene(LEVEL_SCENE);
+        SceneManager.LoadScene(_buildIndex);
     }
 
     public void Lose(string reason)

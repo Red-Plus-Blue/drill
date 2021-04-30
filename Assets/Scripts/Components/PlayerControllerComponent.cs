@@ -25,6 +25,8 @@ public class PlayerControllerComponent : MonoBehaviour
     protected float _rotationSpeed = 90f;
     [SerializeField]
     protected GameObject _rockEffect;
+    [SerializeField]
+    protected Transform _drillHead;
 
     protected DrillAnimatorComponent _animator;
 
@@ -67,7 +69,16 @@ public class PlayerControllerComponent : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(InputLocked || _outOfFuel) { return; }
+        var diggableTilemap = FindObjectOfType<DiggableTilemapComponent>();
+        if (diggableTilemap)
+        {
+            diggableTilemap.Dig(
+                Mathf.RoundToInt(_drillHead.position.x),
+                Mathf.RoundToInt(_drillHead.position.y)
+            );
+        }
+
+        if (InputLocked || _outOfFuel) { return; }
 
         var horizontal = _horizontal();
         var vertical = _vertical();
@@ -105,7 +116,7 @@ public class PlayerControllerComponent : MonoBehaviour
             enemy.Stun();
             return;
         }
-        
+
         var block = other.GetComponent<BlockComponent>();
         if (!block) { return; }
 

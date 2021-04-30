@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Main-Tilemap.unity
+    guid: 82c9d8918c1a9594c9ae1627c2f43606
   m_configObjects: {}

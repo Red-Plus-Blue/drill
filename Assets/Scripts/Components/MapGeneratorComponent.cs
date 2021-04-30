@@ -18,6 +18,8 @@ public class MapGeneratorComponent : MonoBehaviour
     [SerializeField]
     protected Tile _impassableBlock;
     [SerializeField]
+    protected List<Tile> _moneyBlocks;
+    [SerializeField]
     protected Transform _background;
     [SerializeField]
     protected GameObject _exitPrefab;
@@ -60,12 +62,11 @@ public class MapGeneratorComponent : MonoBehaviour
                         var position = new Vector3(x, y, transform.position.z);
                         var isEdge = (x <= 2) || (y <= 2) || (x >= _width - 3) || (y >= _height - 3);
                         var block = isEdge ? _impassableBlock : _block;
-
-                        /*
-                        if (tile != _impassableBlockPrefab)
+                        if (block != _impassableBlock)
                         {
-                            prefab = (Random.Range(0, 10) < 1) ? _moneyBlocks[Random.Range(0, _moneyBlocks.Count)] : prefab;
+                            block = (Random.Range(0, 10) < 1) ? _moneyBlocks[Random.Range(0, _moneyBlocks.Count)] : block;
                         }
+                        /*
                         if (prefab != _impassableBlockPrefab)
                         {
                             prefab = (Random.Range(0, 75) < 1) ? _fuelBlock : prefab;

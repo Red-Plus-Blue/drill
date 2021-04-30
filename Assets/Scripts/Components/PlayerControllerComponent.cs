@@ -12,6 +12,7 @@ public class PlayerControllerComponent : MonoBehaviour
         Durability = 1_000f,
         Fuel = 100f
     };
+
     public IRange<int> Money => _money;
     public IRange<float> Fuel => _fuel;
     public IRange<float> Durability => _durability;

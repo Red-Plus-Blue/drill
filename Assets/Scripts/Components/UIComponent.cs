@@ -26,7 +26,9 @@ public class UIComponent : MonoBehaviour
     [SerializeField]
     protected RectTransform _joystick;
 
-    protected (float, float) _fuelRange; 
+    protected PlayerControllerComponent _player;
+
+    protected (float, float) _fuelRange;
     protected (float, float) _durabilityRange;
 
     private void Start()

@@ -18,6 +18,8 @@ public class MapGeneratorComponent : MonoBehaviour
     [SerializeField]
     protected Tile _impassableBlock;
     [SerializeField]
+    protected Tile _fuelBlock;
+    [SerializeField]
     protected List<Tile> _moneyBlocks;
     [SerializeField]
     protected Transform _background;
@@ -66,11 +68,10 @@ public class MapGeneratorComponent : MonoBehaviour
                         {
                             block = (Random.Range(0, 10) < 1) ? _moneyBlocks[Random.Range(0, _moneyBlocks.Count)] : block;
                         }
-                        /*
-                        if (prefab != _impassableBlockPrefab)
+                        if (block != _impassableBlock)
                         {
-                            prefab = (Random.Range(0, 75) < 1) ? _fuelBlock : prefab;
-                        }*/
+                            block = (Random.Range(0, 75) < 1) ? _fuelBlock : block;
+                        }
 
                         _dirt.SetTile(new Vector3Int(x, y, 0), block);
                     });

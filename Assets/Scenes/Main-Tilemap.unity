@@ -3857,6 +3857,7 @@ MonoBehaviour:
   _enemyPrefab: {fileID: 3224041150178841763, guid: 2a1a2e5a84523cd4381dad80ff86601d, type: 3}
   _block: {fileID: 11400000, guid: 4673ec3332978a74abe1af858f2bd773, type: 2}
   _impassableBlock: {fileID: 11400000, guid: 3331343625d5b594eb73bc0ed66091b8, type: 2}
+  _fuelBlock: {fileID: 11400000, guid: ae8a69639d6cb5b4786a378c0888ddf2, type: 2}
   _moneyBlocks:
   - {fileID: 11400000, guid: 984336e6689215040aecf3d63f39e3d1, type: 2}
   - {fileID: 11400000, guid: 50a4ab2ceb64c0f43b02491a39e97c90, type: 2}

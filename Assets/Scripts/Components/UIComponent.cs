@@ -12,9 +12,9 @@ public class UIComponent : MonoBehaviour
     [SerializeField]
     protected TMP_Text _money;
     [SerializeField]
-    protected RectTransform _needle;
-    [SerializeField]
     protected TMP_Text _prompt;
+    [SerializeField]
+    protected RectTransform _fuel;
     [SerializeField]
     protected RectTransform _durability;
     [SerializeField]
@@ -68,7 +68,7 @@ public class UIComponent : MonoBehaviour
     public void SetFuelLevel(float fuel)
     {
         var value = fuel / _fuelRange.Item2;
-        _needle.rotation = Quaternion.Euler(0f, 0f, 80f + (-160 * value));
+        _fuel.localScale = new Vector3(value, _fuel.localScale.y, _fuel.localScale.z);
     }
 
     public void SetMoney(int amount)

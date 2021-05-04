@@ -15,5 +15,5 @@ MonoBehaviour:
   Money: 0
   Fuel: 30
   Impassable: 0
-  DamagedSprite: {fileID: 21300000, guid: 30e3de895af6ef1448d00cb0415d03d4, type: 3}
+  DamagedSprite: {fileID: 21300000, guid: d29457dd9b3eae243b3dc46bff4d5d96, type: 3}
   SpawnOnDeath: []

@@ -451,6 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buildIndex: 1
+  _interactionKey: 101
 --- !u!1 &174499413
 GameObject:
   m_ObjectHideFlags: 0

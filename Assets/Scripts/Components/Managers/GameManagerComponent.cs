@@ -9,8 +9,12 @@ public class GameManagerComponent : MonoBehaviour
     public int Level { get; protected set; }
     public bool Defeated { get; protected set; }
 
+    public KeyCode InteractionKey => _interactionKey;
+
     [SerializeField]
     protected int _buildIndex;
+    [SerializeField]
+    protected KeyCode _interactionKey;
 
     protected bool _exiting;
 

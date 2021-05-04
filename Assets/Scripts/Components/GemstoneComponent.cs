@@ -9,7 +9,10 @@ public class GemstoneComponent : MonoBehaviour
     private void Update()
     {
         if(!_target) { return; }
-        transform.position = Vector3.Lerp(transform.position, _target.position, 5f * Time.deltaTime);
+        var distance = _target.position - transform.position;
+        transform.position += distance.normalized * 3f * Time.deltaTime;
+        transform.localScale = Vector3.one * (Mathf.Min(0.5f, distance.magnitude) / 0.5f);
+        
         if(Vector3.Distance(transform.position, _target.position) < 0.1f)
         {
             FindObjectOfType<PlayerControllerComponent>().AddMoney(_money);

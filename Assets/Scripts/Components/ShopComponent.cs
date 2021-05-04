@@ -31,7 +31,7 @@ public class ShopComponent : MonoBehaviour
         if (!other.GetComponentInParent<PlayerControllerComponent>()) { return; }
         _currentShop = this;
         var cost = _cost.ToString("###,###,##0");
-        _ui.SetPrompt($"Buy: {_item}: (${cost})\nPess 'q' to buy");
+        _ui.SetPrompt($"Buy: {_item}: (${cost})\nPess '{GameManagerComponent.Instance.InteractionKey}' to buy");
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -45,7 +45,7 @@ public class ShopComponent : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q) && _currentShop == this)
+        if(Input.GetKeyDown(GameManagerComponent.Instance.InteractionKey) && _currentShop == this)
         {
             if(_player.CanBuy(_cost))
             {

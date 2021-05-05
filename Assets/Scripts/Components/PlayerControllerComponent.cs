@@ -16,6 +16,7 @@ public class PlayerControllerComponent : MonoBehaviour
     public IRange<int> Money => _money;
     public IRange<float> Fuel => _fuel;
     public IRange<float> Durability => _durability;
+    public IRange<int> Heat => _heat;
 
     public bool InputLocked;
     public int MiningDamage = 2;
@@ -34,10 +35,12 @@ public class PlayerControllerComponent : MonoBehaviour
     protected Range<int> _money = new Range<int>(0, 0, 999_999_999);
     protected Range<float> _fuel = new Range<float>(100, 0, 100);
     protected Range<float> _durability = new Range<float>(1_000, 0, 1_000);
+    protected Range<int> _heat = new Range<int>(0, 0, 100);
 
     protected float _drillDelay = 0.15f;
 
     protected float _nextDrillTime;
+    protected float _nextHeatDecayTime;
     protected bool _outOfFuel;
 
     protected Rigidbody2D _rigidbody2D;
@@ -65,6 +68,12 @@ public class PlayerControllerComponent : MonoBehaviour
         {
             _outOfFuel = true;
             GameManagerComponent.Instance.Lose("Out of Fuel");
+        }
+
+        if (Time.time > _nextHeatDecayTime)
+        {
+            _heat.Set(_heat.Current - 1);
+            _nextHeatDecayTime = Time.time + 0.25f;
         }
     }
 
@@ -135,11 +144,12 @@ public class PlayerControllerComponent : MonoBehaviour
         {
             _durability.Set(_durability.Current - 1);
             _animator.DamageBlock();
-            _animator.IncreaseHeat(1);
+            _heat.Set(_heat.Current + 1);
             block.TakeDamge(MiningDamage, true);
             var effect = Instantiate(_rockEffect, block.transform);
             Destroy(effect, 0.6f);
             _nextDrillTime = Time.time + _drillDelay;
+            _nextHeatDecayTime = Time.time + 1.0f;
         }
     }
 
@@ -156,6 +166,7 @@ public class PlayerControllerComponent : MonoBehaviour
         _money.RemoveAllListeners();
         _fuel.RemoveAllListeners();
         _durability.RemoveAllListeners();
+        _heat.RemoveAllListeners();
     }
 
     public void Die()

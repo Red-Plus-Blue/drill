@@ -12,8 +12,6 @@ public class DrillAnimatorComponent : MonoBehaviour
     [SerializeField]
     protected SpriteRenderer _drillRenderer;
     [SerializeField]
-    protected int _maxHeat;
-    [SerializeField]
     protected Color _maxHeathColor;
     [SerializeField]
     protected SpriteRenderer _dirtRenderer;
@@ -23,9 +21,6 @@ public class DrillAnimatorComponent : MonoBehaviour
     protected List<ParticleSystem> _drillParticles;
 
     protected Color _startColor;
-
-    protected int _heat;
-    protected float _nextHeatDecayTime;
 
     protected int _damageToBlocks;
 
@@ -42,6 +37,8 @@ public class DrillAnimatorComponent : MonoBehaviour
     protected List<SpriteRenderer> _trackRenderers;
 
     protected Sequence _animation;
+
+    protected (int, int) _heatBounds;
 
     protected int Frame => (int)(0.5 + Mathf.Cos(Time.time * 5.0f));
 
@@ -63,29 +60,23 @@ public class DrillAnimatorComponent : MonoBehaviour
             .Subscribe(_ => UpdateTracks());
     }
 
+    private void Start()
+    {
+        var player = GetComponent<PlayerControllerComponent>();
+        player.Heat.Bounds.Subscribe(bounds => _heatBounds = bounds);
+        player.Heat.Value.Subscribe(UpdateHeat);
+    }
+
     private void Update()
     {
         _drillSprite.sprite = _drillFrames[Frame];
-
-        if(Time.time > _nextHeatDecayTime)
-        {
-            _heat = Mathf.Max(0, _heat - 1);
-            _nextHeatDecayTime = Time.time + 0.25f;
-        }
-
-        _drillRenderer.color = Color.Lerp(_startColor, _maxHeathColor, (float)_heat / _maxHeat);
+        
     }
 
     public void DamageBlock()
     {
         _damageToBlocks += 1;
         _dirtRenderer.sprite = _dirtLevels[Mathf.Min(_dirtLevels.Count - 1, _damageToBlocks / 100)];
-    }
-
-    public void IncreaseHeat(int amount)
-    {
-        _heat = Mathf.Min(_maxHeat, _heat + amount);
-        _nextHeatDecayTime = Time.time + 1.0f;
     }
 
     public void ShowDrillParticles()
@@ -99,6 +90,11 @@ public class DrillAnimatorComponent : MonoBehaviour
     public void HideDrillParticles()
     {
         _drillParticles.ForEach(particle => particle.Stop());
+    }
+
+    protected void UpdateHeat(int heat)
+    {
+        _drillRenderer.color = Color.Lerp(_startColor, _maxHeathColor, (float)heat / _heatBounds.Item2);
     }
 
     protected void UpdateTracks()

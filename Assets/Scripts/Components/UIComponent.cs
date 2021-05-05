@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+using System;
 using System.Collections.Generic;
 
 using TMPro;
@@ -16,6 +17,8 @@ public class UIComponent : MonoBehaviour
     [SerializeField]
     protected RectTransform _fuel;
     [SerializeField]
+    protected RectTransform _heat;
+    [SerializeField]
     protected RectTransform _durability;
     [SerializeField]
     protected GameObject _defeatScreen;
@@ -30,6 +33,7 @@ public class UIComponent : MonoBehaviour
 
     protected (float, float) _fuelRange;
     protected (float, float) _durabilityRange;
+    protected (int, int) _heatRange;
 
     private void Start()
     {
@@ -40,6 +44,9 @@ public class UIComponent : MonoBehaviour
 
         player.Fuel.Bounds.Subscribe(value => _fuelRange = value);
         player.Fuel.Value.Subscribe(SetFuelLevel);
+
+        player.Heat.Bounds.Subscribe(bounds => _heatRange = bounds);
+        player.Heat.Value.Subscribe(SetHeat);
 
         _level.text = $"Level: {GameManagerComponent.Instance.Level}";
 
@@ -74,6 +81,12 @@ public class UIComponent : MonoBehaviour
     public void SetMoney(int amount)
     {
         _money.text = amount.ToString("###,###,##0");
+    }
+
+    public void SetHeat(int heat)
+    {
+        var value = Convert.ToSingle(heat) / _heatRange.Item2;
+        _heat.localScale = new Vector3(value, _heat.localScale.y, _heat.localScale.z);
     }
 
     public void SetPrompt(string text)

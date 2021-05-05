@@ -77,7 +77,6 @@ public class MapGeneratorComponent : MonoBehaviour
                     });
             });
 
-        /*
         Enumerable.Range(2, 4).ToList().ForEach(_ =>
         {
             var spawn = new Vector2Int(
@@ -85,10 +84,9 @@ public class MapGeneratorComponent : MonoBehaviour
                 Random.Range((int)(0.15f * _height), (int)(0.85f * _height))
             );
 
-            Destroy(_blocks[spawn.x, spawn.y].gameObject);
+            _dirt.SetTile((Vector3Int)spawn, null);
             Instantiate(_enemyPrefab, new Vector3(spawn.x, spawn.y, transform.position.z), Quaternion.identity);
         });
-        */
 
         // Spawn Player
         var spawn = new Vector2Int(

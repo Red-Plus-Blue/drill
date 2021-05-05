@@ -159,19 +159,28 @@ public class EnemyComponent : MonoBehaviour
                 return;
             }
 
-
+            var tilemap = hit.collider.GetComponent<DiggableTilemapComponent>();
             var block = hit.collider.GetComponent<BlockComponent>();
-            if(block)
+            if (tilemap)
             {
-                if(block.Definition.Impassable)
+                var point = hit.point + ((hit.point - (Vector2)transform.position).normalized * 0.1f);
+                block = tilemap.Dig(Mathf.RoundToInt(point.x), Mathf.RoundToInt(point.y));
+
+                if(!block || block.Definition.Impassable)
                 {
                     _targetVector = -transform.up;
                     _state = StateTurnAround;
                     return;
                 }
+            }
+
+            if(block)
+            {
                 _state = StateMine;
                 _target = block;
+                return;
             }
+   
             return;
         }
 

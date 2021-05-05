@@ -3,11 +3,13 @@
 public class IncreaseMiningSpeedEffect : MonoBehaviour
 {
     protected PlayerControllerComponent _player;
+    protected int _initialMiningDamage;
 
     private void Awake()
     {
         _player = FindObjectOfType<PlayerControllerComponent>();
-        _player.MiningDamage = 4;
+        _initialMiningDamage = _player.MiningDamage;
+        _player.MiningDamage *= 2;
         Destroy(gameObject, 30.0f);
     }
 
@@ -17,7 +19,7 @@ public class IncreaseMiningSpeedEffect : MonoBehaviour
         {
             return;
         }
-        _player.MiningDamage = 2;
+        _player.MiningDamage = _initialMiningDamage;
     }
 
 }

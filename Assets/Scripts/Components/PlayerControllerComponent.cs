@@ -19,7 +19,8 @@ public class PlayerControllerComponent : MonoBehaviour
     public IRange<int> Heat => _heat;
 
     public bool InputLocked;
-    public int MiningDamage = 2;
+    public int MiningDamage = 20;
+    protected int _baseMiningDamage = 20;
 
     [SerializeField]
     protected float _speed = 3f;
@@ -60,6 +61,7 @@ public class PlayerControllerComponent : MonoBehaviour
         _money.Set(SavedPlayer.Money);
         _fuel.Set(SavedPlayer.Fuel);
         _durability.Set(SavedPlayer.Durability);
+        _heat.Value.Subscribe(value => MiningDamage = _baseMiningDamage + (value / 5));
     }
 
     private void Update()
@@ -72,7 +74,7 @@ public class PlayerControllerComponent : MonoBehaviour
 
         if (Time.time > _nextHeatDecayTime)
         {
-            _heat.Set(_heat.Current - 1);
+            _heat.Set(_heat.Current - 2);
             _nextHeatDecayTime = Time.time + 0.25f;
         }
     }

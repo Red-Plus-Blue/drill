@@ -3,8 +3,8 @@
 public class Block
 {
     public Action<bool> OnDeath;
-    public int HealthMax { get; protected set; } = 10;
-    public int Health { get; protected set; } = 10;
+    public int HealthMax { get; protected set; } = 100;
+    public int Health { get; protected set; } = 100;
     public bool Dead { get; protected set; }
 
     public void TakeDamage(int amount, bool isPlayer) {

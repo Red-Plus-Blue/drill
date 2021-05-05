@@ -198,7 +198,7 @@ public class EnemyComponent : MonoBehaviour
                 return;
             }
 
-            _target.TakeDamge(3, false);
+            _target.TakeDamge(30, false);
             _nextMineTime = Time.time + 0.3f;
         }
     }

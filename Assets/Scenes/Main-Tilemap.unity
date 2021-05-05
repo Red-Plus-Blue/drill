@@ -4722,6 +4722,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4814206125885206819, guid: 79919ce5b4a6046448ad52295469fc1e, type: 3}
     - target: {fileID: 3351549040536252851, guid: 69ef3d0f3163357478d6156a968a9da0, type: 3}
+      propertyPath: MiningDamage
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3351549040536252851, guid: 69ef3d0f3163357478d6156a968a9da0, type: 3}
       propertyPath: _rigidbody2D
       value: 
       objectReference: {fileID: 370768262}
